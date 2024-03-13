@@ -1,0 +1,4 @@
+FOLLOWING ITEMS SHOULD BE ORDERED SOON
+1. Cheese (ID: 102) Current Quantity: 15, Threshold Quantity: 31
+2. Ghee (ID: 170) Current Quantity: 15, Threshold Quantity: 20
+3. PeanutButter (ID: 444) Current Quantity: 20, Threshold Quantity: 30

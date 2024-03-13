@@ -1,0 +1,5 @@
+1 dairy_products
+2 pulses_and_grains
+3 bath_and_cleaning_products
+4 ready_to_eat_food
+5 vegetables
