@@ -90,7 +90,7 @@ void print_bill_node(billItem *node){
 
 
 void print_bill(int userId, bill* b){
-    FILE *fp = fopen("bill.txt", "a"); // Open the file in append mode
+    FILE *fp = fopen("_bill.txt", "a"); // Open the file in append mode
     if (fp == NULL) {
         printf("Failed to open file for writing.\n");
         return;

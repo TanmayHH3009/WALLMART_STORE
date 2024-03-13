@@ -6,6 +6,10 @@
 # define WALMART_H
 #define MAX_AISLE 8
 #define MAX_NAME_SIZE 20
+# define MAX_NAME_SIZE 20
+# define DEFAULT_SIZE 10
+# define MAP_SIZE 100
+# define INVOICE_SIZE 10
 
 static int billNo=1;
 typedef struct Node
@@ -40,6 +44,25 @@ typedef struct bill{
     billItem *item;
     int cost;
 }bill;
+
+
+
+typedef struct item_map{
+    billItem *item;
+    int count;
+}item_map;
+
+item_map map[MAP_SIZE][MAP_SIZE];
+
+void initialize_map();
+
+int hash_function(int item_id);
+
+void update_frequency(billItem *head);
+
+void print_frequency(FILE *fptr, int item_id);
+
+
 //done
 char* liveTime();
 

@@ -1,103 +1,118 @@
 #include"walmart.h"
+
+
 void ExpiryWithinOneWeek(aisle a[], const char* todayDate) {
+    FILE* fp = fopen("_expiryOneWeek.txt", "a");
+    if (fp == NULL) {
+        printf("Error opening file for writing.\n");
+        return;
+    }
+
     int i = 0;
-   
     while (i < MAX_AISLE && strcmp("ready_to_eat_food", a[i].itemType) != 0) {
         i++;
-
     }
     i--;
-    
 
     if (i >= MAX_AISLE) {
-        
-        printf("Aisle for 'ready_to_eat_food' not found.\n");
+        fprintf(fp, "Aisle for 'ready_to_eat_food' not found.\n");
+        fclose(fp);
         return;
     }
 
     if (a[i].list == NULL) {
-        
-        printf("No items in 'ready_to_eat_food' aisle.\n");
+        fprintf(fp, "No items in 'ready_to_eat_food' aisle.\n");
+        fclose(fp);
         return;
     }
 
     Item* curr = a[i].list;
     while (curr != NULL) {
-         
         int diff = abs(dateToInt(curr->expiryDate) - dateToInt(todayDate));
         if ((diff <= 7 && diff >= 0 )|| (diff>=73 && diff<=79) || (diff>=8870 && diff<=8876)) {
-            printf("Item: %s, Expiry Date: %s, Expires within one week\n", curr->itemName, curr->expiryDate);
+            fprintf(fp, "Item: %s, Expiry Date: %s, Expires within one week\n", curr->itemName, curr->expiryDate);
         } else {
-            printf("Item: %s, Expiry Date: %s, Expires not in one week\n", curr->itemName, curr->expiryDate);
+            fprintf(fp, "Item: %s, Expiry Date: %s, Expires not in one week\n", curr->itemName, curr->expiryDate);
         }
         curr = curr->next;
     }
+
+    fclose(fp);
 }
 
 
 //done
 void ExpiryWithinOneDay(aisle a[], const char* todayDate) {
+    FILE* fp = fopen("_expiryOneDay.txt", "w");
+    if (fp == NULL) {
+        printf("Error opening file for writing.\n");
+        return;
+    }
+
     int i = 0;
-   
     while (i < MAX_AISLE && strcmp("dairy_products", a[i].itemType) != 0) {
         i++;
-
     }
     i--;
-    
-    
 
     if (i >= MAX_AISLE) {
-        
-        printf("Aisle for 'dairy_products' not found.\n");
+        fprintf(fp, "Aisle for 'dairy_products' not found.\n");
+        fclose(fp);
         return;
     }
 
     if (a[i].list == NULL) {
-        
-        printf("No items in 'dairy_products' aisle.\n");
+        fprintf(fp, "No items in 'dairy_products' aisle.\n");
+        fclose(fp);
         return;
     }
 
     Item* curr = a[i].list;
     while (curr != NULL) {
-         
         int diff = abs(dateToInt(curr->expiryDate) - dateToInt(todayDate));
-        //printf("%d and %d \n",dateToInt(curr->expiryDate), dateToInt(todayDate));
-        if ((diff <= 1 && diff >= 0) || (diff ==72) || (diff==71) || (diff==70) || (diff==8870) ) {
-            printf("Item: %s, Expiry Date: %s, Expires within one day\n", curr->itemName, curr->expiryDate);
+        if ((diff <= 1 && diff >= 0) || (diff == 72) || (diff == 71) || (diff == 70) || (diff == 8870)) {
+            fprintf(fp, "Item: %s, Expiry Date: %s, Expires within one day\n", curr->itemName, curr->expiryDate);
         } else {
-            printf("Item: %s, Expiry Date: %s, Expires not in one day\n", curr->itemName, curr->expiryDate);
+            fprintf(fp, "Item: %s, Expiry Date: %s, Expires not in one day\n", curr->itemName, curr->expiryDate);
         }
         curr = curr->next;
     }
+
+    fclose(fp);
 }
-
-
-
 void checkAvailability(aisle a[], int itemId, int quantity, const char* expiryDate) {
+    FILE* fp = fopen("_availability.txt", "a");
+    if (fp == NULL) {
+        printf("Error opening file for writing.\n");
+        return;
+    }
+
     Item* reqItem = search_item(itemId, a);
     if (reqItem == NULL) {
-        printf("Item with ID %d is not available in the store.\n", itemId);
+        fprintf(fp, "Item with ID %d is not available in the store.\n", itemId);
+        fclose(fp);
         return;
     }
 
     if (reqItem->quantity < quantity) {
-        printf("Item with ID %d does not have enough quantity available.\n", itemId);
+        fprintf(fp, "Item with ID %d does not have enough quantity available.\n", itemId);
+        fclose(fp);
         return;
     }
 
     if (compareDates(expiryDate, reqItem->expiryDate) <= 0) {
-        printf("Item with ID %d has expired.\n", itemId);
+        fprintf(fp, "Item with ID %d has expired.\n", itemId);
+        fclose(fp);
         return;
     }
 
-    printf("Item with ID %d is available for the required quantity and within the expiry date.\n", itemId);
+    fprintf(fp, "Item with ID %d is available for the required quantity and within the expiry date.\n", itemId);
+    fclose(fp);
 }
 
 void checkThreshold(aisle a[])  {
     int m=1;
-    FILE *fp = fopen("threshold_notification.txt", "w");
+    FILE *fp = fopen("_threshold_notification.txt", "w");
     if (!fp) {
        
         printf("Failed to open file for writing.\n");

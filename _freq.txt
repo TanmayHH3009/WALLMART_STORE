@@ -1,0 +1,7 @@
+Printing for item KitKat -: 
+Item name : Eggs	Item id : 401	Frequency : 1
+Item name : Potatoes	Item id : 503	Frequency : 1
+Item name : Apples	Item id : 523	Frequency : 1
+Item name : Spinach	Item id : 590	Frequency : 1
+
+

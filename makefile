@@ -1,7 +1,7 @@
 
 
-all: driver.o notification.o item.o aisle.o date.o bill.o
-	gcc driver.o notification.o item.o aisle.o date.o bill.o -o out
+all: driver.o notification.o item.o aisle.o date.o bill.o map.o
+	gcc driver.o notification.o item.o aisle.o date.o bill.o map.o -o out
 
 driver.o: driver.c
 	gcc -c driver.c
@@ -19,6 +19,9 @@ date.o: date.c
 
 bill.o: bill.c
 	gcc -c bill.c 
+
+map.o: map.c
+	gcc -c map.c
 
 clean:
 	rm -f  *.o

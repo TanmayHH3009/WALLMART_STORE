@@ -48,14 +48,21 @@ void addAisle(aisle a[], FILE *fp){
 }
 
 void printAisle(aisle a[]){
-    int i = 1;
-    while(a[i].aisleNo>0 && a[i].aisleNo<=8){
-        
-        printf("%d %s\n",a[i].aisleNo,a[i].itemType);
-       i++;
+    FILE* fp = fopen("_aisle.txt", "w");
+    if (fp == NULL) {
+        printf("Error opening file for writing.\n");
+        return;
     }
 
+    int i = 1;
+    while(a[i].aisleNo > 0 && a[i].aisleNo <= 8){
+        fprintf(fp, "%d %s\n", a[i].aisleNo, a[i].itemType);
+        i++;
+    }
+
+    fclose(fp);
 }
+
 
 void mergeAisles(aisle a[], int a1, int a2){
     a1--;a2--;
@@ -75,6 +82,7 @@ void mergeAisles(aisle a[], int a1, int a2){
     }
   
     a[a2].list = NULL;
+    printf("Aisles %d and %d merged successfully..",a1,a2);
 
 
 

@@ -1,0 +1,5 @@
+Item: Milk, Expiry Date: 01-03-2024, Expires not in one day
+Item: Cheese, Expiry Date: 01-12-2024, Expires not in one day
+Item: Lassi, Expiry Date: 01-03-2024, Expires not in one day
+Item: GranolaBars, Expiry Date: 01-09-2024, Expires not in one day
+Item: Ghee, Expiry Date: 01-05-2024, Expires not in one day

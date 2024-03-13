@@ -128,7 +128,7 @@ void deleteItem(aisle a[], int id){
 
 
 void printAisleItem(aisle a[]){
-    FILE *fp = fopen("walmartStore.txt", "a");
+    FILE *fp = fopen("_walmartStore.txt", "w");
     if (!fp)
     {
         printf("Failed to open file for writing.\n");
